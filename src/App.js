@@ -1,23 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+import React,{useState} from 'react'
+import {MovieList} from './Components/MovieList';
+import {movieData } from './Components/Data';
+import AddMovie from './Components/AddMovie';
+import {Navbar, Nav, Container} from 'react-bootstrap'
+import Filter from './Components/Filter';
+import Ratingstar from './Ratingstar';
+import Footer from './Components/Footer';
+
 
 function App() {
+  const [movies, setMovies] = useState(movieData);
+  const [inputSearch, setInputSearch] = useState("");
+  const [starRate, setStarRate] = useState(0);
+   const add = (newMovie) => {
+     setMovies ([...movies,newMovie])
+   }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      <Navbar className="nav">
+      <Container className="liste">
+        <Navbar.Brand href="#home"><h1>choose your film </h1></Navbar.Brand>
+        <Nav className="me-auto">
+          <AddMovie className ="addBtn" add={add}/>
+          <Filter inputSearch={inputSearch} setInputSearch={setInputSearch}/>
+          <div className="starsFilter" >
+            <Ratingstar isMovieRating={false} starRate={starRate} setStarRate={setStarRate} />
+          </div>
+        </Nav>
+      </Container>
+
+      </Navbar>
+      <div className={MovieList}>
+        <MovieList movies={movies} inputSearch={inputSearch} starRate={starRate}/>
+      </div>
+      <Footer/>
+      
     </div>
   );
 }
