@@ -1,6 +1,6 @@
 import React from 'react'
 import {Card, Button} from 'react-bootstrap'
-
+import {Link} from 'react-router-dom'
 import '../App.css';
 import MovieRatingstar from '../Ratingstar';
 
@@ -18,7 +18,7 @@ import MovieRatingstar from '../Ratingstar';
                     <div className='starRating' >
                     <MovieRatingstar isMovieRating={true} movieRating= {movies.rating}/>
                     </div>
-                    <Button variant="dark">Watch</Button>
+               <Link to={`/details/${movies.id}`}> <Button variant="dark">Watch</Button> </Link>
                 </Card.Body>
             </Card>
             </div>
